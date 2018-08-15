@@ -19,7 +19,6 @@ $cateNames=getCateName();
 
   .fontSans{
   font-family:'Comic Sans MS', cursive, sans-serif;
-  color:#cc2b2b;
   font-weight:bold;
 }
 
@@ -35,34 +34,39 @@ $cateNames=getCateName();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Wei's Kitchen - Order Now</title>
+    <style type="text/css">
+      .nav .nav-item .order-menu {
+        font-weight:bold; 
+        margin:0 ; 
+        border-radius: 5px 0 0 5px; 
+        border:solid 2px #e0bf61; 
+        border-right:none; 
+        line-height:8vh
+      }
+    </style>
   </head>
   <body>
 
 <!-- background -->
-    <div style="background-color:#f3ebd4; margin:0; border:0">
-
-<!-- title picture -->
-      <div style="background: linear-gradient(#f3ebd4,#ffdc77); margin:0; border:0; height:14vh; display:flex">
-        <h1 class="container fontSans" style="align-self:flex-end">Wei's Kitchen</h1>
-      </div>
+    <div>
 
 <!-- menu bar -->
-      <div class="container" style="background-color: #cc2b2b; height:9vh">
+      <div class="container col-12" style="height: 60px; background: #ff7f0e;">
         <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-          <a class="navbar-brand fontSans" href="Homepage.php"><h4 style="color:white">Wei's Kitchen</h4></a>
+          <a class="navbar-brand fontSans" href="Homepage.php"><h4 style="font-weight:bold">Wei's Kitchen</h4></a>
             <form class="form-inline" style="position:absolute; right:5rem">
               <input class="form-control mr-sm-2" type="search" placeholder="Coupon Code" aria-label="Search">
-              <button class="btn btn-success my-2 my-sm-0" type="submit">APPLY</button>
+              <button class="btn btn-success my-2 my-sm-0" type="submit"  style="color:white;">APPLY</button>
             </form>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="position:absolute; right:0rem">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" style="font-weight:bold">
-              <a class="nav-item nav-link" href="Homepage.php">Home</a>
-              <a class="nav-item nav-link active" href="OrderNow.php">Order Now<span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link " href="Location.php">Location</a>
-              <a class="nav-item nav-link " href="ContactUs.php">Contact Us</a>
+            <div class="navbar-nav" style="font-weight:bold;">
+              <a class="nav-item nav-link" href="Homepage.php">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-item nav-link active" href="OrderNow.php">Order Now</a>
+              <a class="nav-item nav-link" href="Location.php" >Location</a>
+              <a class="nav-item nav-link" href="ContactUs.php">Contact Us</a>
             </div>
           </div>
         </nav>
@@ -70,7 +74,7 @@ $cateNames=getCateName();
 
 
 <!-- tabs-menu -->
-      <div class="container" style="margin-bottom: 7vh; background-color:#ffdc77">
+      <div class="container" style="height:85vh; background-color:#ffdc77">
         <div class="row">
           <div class="col-2 pl-0 pr-0">
             <ul class="nav nav-tabs" id="myTab" role="tablist" style="flex-direction: column; border: none">
@@ -80,7 +84,7 @@ $cateNames=getCateName();
               ?>
               
                 <li class="nav-item">
-                  <a class="nav-link BlueText <?php  if($i==0){echo'active';} ?>" id="<?php echo $cateName['food_cate_id']; ?>-tab" data-toggle="tab" href="#c<?php echo $cateName['food_cate_id']; ?>" role="tab" aria-controls="c<?php echo $cateName['food_cate_id']; ?>" aria-selected="<?php if ($i==0){echo'true';}?>" style="font-weight:bold; margin:0 0 0 2px; border-radius: 5px 0 0 5px; border:solid 2px #e0bf61; border-right:none; line-height:8vh"> 
+                  <a class="nav-link BlueText <?php if($i==0){echo'active';} ?> order-menu" id="<?php echo $cateName['food_cate_id']; ?>-tab" data-toggle="tab" href="#c<?php echo $cateName['food_cate_id']; ?>" role="tab" aria-controls="c<?php echo $cateName['food_cate_id']; ?>" aria-selected="<?php if ($i==0){echo'true';}?>"> 
                     <?php 
                       echo $cateName['cate_name']; 
                     ?> 
@@ -94,13 +98,13 @@ $cateNames=getCateName();
           </div>
 
 <!-- tabs-main -->
-          <div class="col-10 px-0" style="border-left: 1px solid white">
+          <div class="col-10 px-0" style="border-top:solid 3px #e0bf61">
             <div class="tab-content" id="myTabContent">
               <?php
               $i=0;
               foreach ($cateNames as $cateName){
               ?>
-              <div class="tab-pane fade <?php if($i==0){echo 'show active';}?>" id="c<?php echo $cateName['food_cate_id'];?>" role="tabpanel" aria-labelledby="<?php echo $cateName['food_cate_id'];?>-tab" style="height:70vh; overflow-y: scroll; background-color: white;padding:2rem">
+              <div class="tab-pane fade <?php if($i==0){echo 'show active';}?>" id="c<?php echo $cateName['food_cate_id'];?>" role="tabpanel" aria-labelledby="<?php echo $cateName['food_cate_id'];?>-tab" style="height:85vh; overflow-y: scroll; background-color: white;padding:2rem">
 
                 <div class="container pl-0 pr-0">
                   <?php
@@ -122,9 +126,9 @@ $cateNames=getCateName();
                           echo $eachMenu['name'];
                           ?>
                         </h5>
-                        <p class="card-text">Price: $<span class="item-price"><?php echo $eachMenu['price'];?></span></p>
+                        <p class="card-text">$<span class="item-price"><?php echo $eachMenu['price'];?></span></p>
                         <p class="card-text"><?php echo $eachMenu['description'];?></p>
-                        <button class="minusbtn" disabled style="width:2rem" onclick="minusOne('w<?php echo $eachMenu['menu_id'];?>')">-</button><span class="item-num" style="display:inline-block;width:3rem;text-align: center"> 0 </span><button class="plusbtn" style="width:2rem" onclick="plusOne('w<?php echo $eachMenu['menu_id'];?>')">+</button>
+                        <button style="width:2rem" onclick="minusOne('w<?php echo $eachMenu['menu_id'];?>')">-</button><span class="item-num" style="display:inline-block;width:3rem;text-align: center"> 0 </span><button style="width:2rem" onclick="plusOne('w<?php echo $eachMenu['menu_id'];?>')">+</button>
                       </div>
                     </div>
                   <?php
@@ -156,32 +160,28 @@ $cateNames=getCateName();
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Your Cart</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Check-out</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              pickup or delivery<br>
-              if (delivery){address input + map}<br>
-              order list (-,+,delete,price)<br>
-              total
-              <div id="checkoutdetail"></div>
+              ...
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-success" onclick="submitOrder()">Confirm</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
       </div>
 
 <!-- footer -->
-      <div style="background: linear-gradient(#fbd463,#ffdc77,#f3ebd4); border:0; height:8vh; width:100%; position:fixed; right:0rem; bottom:0rem">
+      <div style="background-color: #ff7f0e; border:0; height:60px; width:100%; position:fixed; right:0rem; bottom:0rem">
         
-        <div style="margin:1vh; float:right; font-weight:bold; color:#027e94">
+        <div style="margin:10px 20px; font-size: 18px; float:right; font-weight:bold; color:#027e94">
           <span>Total: </span> <span id="total-price" style="display:inline-block;width:4rem; text-align: left">0</span>
-          <button class="btn btn-success" id="checkoutbtn" onclick="showList()" type="button" disabled data-toggle="modal" data-target="#exampleModal">CHECK OUT</button>
+          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">CHECK OUT</button>
         </div>
       </div>
 
@@ -201,8 +201,6 @@ $cateNames=getCateName();
         var num = num_element.text();
         num_element.text(parseInt(num)+1);
         calcTotal();
-        var minus_element=$('#' + q).find('.minusbtn');
-        minus_element.attr('disabled',false);
       }
 
       function minusOne(q) {
@@ -212,10 +210,6 @@ $cateNames=getCateName();
           num_element.text(parseInt(num)-1);
         }
         calcTotal();
-        if ((parseInt(num)-1)==0){
-          var minus_element=$('#' + q).find('.minusbtn');
-          minus_element.attr('disabled',true);
-        }
       }
 
       function calcTotal() {
@@ -229,36 +223,8 @@ $cateNames=getCateName();
             total = total + num * price;
           }
         );
-        if (total>0){
-          $('#checkoutbtn').attr('disabled',false);
-        }else{
-          $('#checkoutbtn').attr('disabled',true);
-        }
         $('#total-price').text(total.toFixed(2));
       }
-
-      function showList(){
-        var addhtml="";
-        $('.menu_card').each(
-          function() {
-            var num_str = $(this).find('.item-num').text();
-            var num = parseInt(num_str);
-            if (num>0){
-              var item_name = $(this).find('.card-title').text();
-              var price_str = $(this).find('.item-price').text();
-              var price = parseFloat(price_str);
-              subtotal = num * price;
-              addhtml=addhtml+"<p>"+item_name+"*"+num+"="+subtotal+"</p>";
-            }
-          }
-        );
-        $('#checkoutdetail').html(addhtml);
-      }
-
-      // function submitOrder(){
-      //   $.ajax
-      // }
-
 
     </script>
   </body>
