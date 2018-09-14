@@ -156,25 +156,43 @@ $cateNames=getCateName();
 
 
 <!-- Checkout Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Check-out</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total amount to pay: $<span id="total-price-checkout"></span> ($5 delivery fee included) </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Address:</label>
+            <input type="text" class="form-control" id="recipient-address">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Cellphone:</label>
+            <input type="text" class="form-control" id="phone-number">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="confirm-order">Confirm Order</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- footer -->
       <div style="background-color: #ff7f0e; border:0; height:60px; width:100%; position:fixed; right:0rem; bottom:0rem">
@@ -221,10 +239,34 @@ $cateNames=getCateName();
             var price_str = $(this).find('.item-price').text();
             var price = parseFloat(price_str);
             total = total + num * price;
+            totalWithDelivery = total + 5;
           }
         );
         $('#total-price').text(total.toFixed(2));
+        $('#total-price-checkout').text(totalWithDelivery.toFixed(2));
       }
+
+
+      $('#confirm-order').on('click',function(){
+
+        var recipientName = $('#recipient-name').val();
+        var recipientAddress = $('#recipient-address').val();
+        var phoneNumber = $('#recipient-address').val();
+        var message = $('#message-text').val();
+        var amountToPay = $('#total-price').val();
+
+        $.post(
+          'https://mandrillapp.com/api/1.0/messages/send.json',
+                      
+          '{"message":{"html":"<h3>Order from Mr/Ms '  + recipientName + ':</h3> <p>Total amount to pay: $' + amountToPay + '<br>Address: ' + recipientAddress + '<br>Phone number: ' + phoneNumber + '<br>Message: ' + message + '</p>","text":"Example text content","subject":"example subject","from_email":"admin@myseasonalrecipes.com","from_name":"Wei\'s Kitchen","to":[{"email":"myemailaddress@gmail.com","name":"Wei","type":"to"}],"headers":{"Reply-To":"myemailaddress@gmail.com"},"important":false,"track_opens":null,"track_clicks":null},"async":false,"ip_pool":"Main Pool","send_at":null,"key":"mymandrillkey"}'
+          ,
+          function(data) {
+            console.table(data);
+          },
+          'json'
+        );
+        
+      });
 
     </script>
   </body>
